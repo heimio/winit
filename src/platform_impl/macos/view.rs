@@ -754,22 +754,14 @@ declare_class!(
             // be mutually exclusive anyhow, which is why the API is rather incoherent). If no momentum
             // phase is recorded (or rather, the started/ended cases of the momentum phase) then we
             // report the touch phase.
-            let phase = match event.momentumPhase() {
+            let phase = match event.phase() {
                 NSEventPhase::NSEventPhaseMayBegin | NSEventPhase::NSEventPhaseBegan => {
                     TouchPhase::Started
                 }
                 NSEventPhase::NSEventPhaseEnded | NSEventPhase::NSEventPhaseCancelled => {
                     TouchPhase::Ended
                 }
-                _ => match event.phase() {
-                    NSEventPhase::NSEventPhaseMayBegin | NSEventPhase::NSEventPhaseBegan => {
-                        TouchPhase::Started
-                    }
-                    NSEventPhase::NSEventPhaseEnded | NSEventPhase::NSEventPhaseCancelled => {
-                        TouchPhase::Ended
-                    }
-                    _ => TouchPhase::Moved,
-                },
+                _ => TouchPhase::Moved,
             };
 
             self.update_potentially_stale_modifiers(event);
