@@ -749,7 +749,7 @@ declare_class!(
                     MouseScrollDelta::LineDelta(x as f32, y as f32)
                 }
             };
-            
+
             // The "momentum phase," if any, has higher priority than touch phase (the two should
             // be mutually exclusive anyhow, which is why the API is rather incoherent). If no momentum
             // phase is recorded (or rather, the started/ended cases of the momentum phase) then we
@@ -765,7 +765,8 @@ declare_class!(
                     NSEventPhase::NSEventPhaseEnded | NSEventPhase::NSEventPhaseCancelled => {
                         TouchPhase::Ended
                     }
-                    _ => TouchPhase::Moved,
+                    NSEventPhase::NSEventPhaseChanged => TouchPhase::Moved,
+                    _ => return
                 },
             };
 
