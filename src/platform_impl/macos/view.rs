@@ -755,11 +755,8 @@ declare_class!(
             // phase is recorded (or rather, the started/ended cases of the momentum phase) then we
             // report the touch phase.
             let phase = match event.momentumPhase() {
-                NSEventPhase::NSEventPhaseMayBegin | NSEventPhase::NSEventPhaseBegan => {
-                    TouchPhase::Started
-                }
-                NSEventPhase::NSEventPhaseEnded | NSEventPhase::NSEventPhaseCancelled => {
-                    TouchPhase::Ended
+                NSEventPhase::NSEventPhaseMayBegin | NSEventPhase::NSEventPhaseBegan | NSEventPhase::NSEventPhaseEnded | NSEventPhase::NSEventPhaseCancelled => {
+                    return
                 }
                 _ => match event.phase() {
                     NSEventPhase::NSEventPhaseMayBegin | NSEventPhase::NSEventPhaseBegan => {
