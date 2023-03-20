@@ -756,7 +756,7 @@ declare_class!(
             // report the touch phase.
             let phase = match event.momentumPhase() {
                 NSEventPhase::NSEventPhaseMayBegin | NSEventPhase::NSEventPhaseBegan | NSEventPhase::NSEventPhaseEnded | NSEventPhase::NSEventPhaseCancelled => {
-                    return
+                    TouchPhase::Ended
                 }
                 _ => match event.phase() {
                     NSEventPhase::NSEventPhaseMayBegin | NSEventPhase::NSEventPhaseBegan => {
