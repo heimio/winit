@@ -758,7 +758,7 @@ declare_class!(
                 NSEventPhase::NSEventPhaseMayBegin | NSEventPhase::NSEventPhaseBegan => {
                     TouchPhase::Started
                 }
-                NSEventPhase::NSEventPhaseEnded | NSEventPhase::NSEventPhaseCancelled | NSEventPhase::NSEventPhaseNone => {
+                NSEventPhase::NSEventPhaseEnded | NSEventPhase::NSEventPhaseCancelled => {
                     TouchPhase::Ended
                 }
                 _ => TouchPhase::Moved,
