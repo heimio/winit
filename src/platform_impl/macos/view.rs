@@ -741,7 +741,7 @@ declare_class!(
             self.mouse_motion(event);
 
             let delta = {
-                let (x, y) = (event.deltaX(), event.deltaY());
+                let (x, y) = (event.scrollingDeltaX(), event.scrollingDeltaY());
                 if event.hasPreciseScrollingDeltas() {
                     let delta = LogicalPosition::new(x, y).to_physical(self.scale_factor());
                     MouseScrollDelta::PixelDelta(delta)
